@@ -22,15 +22,14 @@ setInterval(() => {
 
   sns.publish(payload).promise()
     .then(data => {
-      console.log(data);
+      console.log('Order sent to driver ------> \n', data);
     })
     .catch(console.error);
 }, 5000);
 
 ///////////////////////////////////////////////
 
-// TODO: Poll from sqs
-
+// receive delivery acknowledgement
 const { Consumer } = require('sqs-consumer');
 
 const app = Consumer.create({

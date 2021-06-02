@@ -19,9 +19,11 @@ const app = Consumer.create({
     // do some work with `message`
     let parsedBody = JSON.parse(msg.Body);
     let myOrder = JSON.parse(parsedBody.Message);
-    console.log(myOrder);
+    console.log('!!!! Received order !!!!', myOrder);
     // console.log("text is =", myOrder.orderItem);
     // console.log("store is =", myOrder.storeName);
+
+    // creating delivery acknowledgement in vendor queue
     await acknowledgement();
   }
 });
@@ -49,7 +51,8 @@ function acknowledgement() {
       };
   
       const response = await producer.send(message);
-      console.log(response);
+      // console.log(response);
+      console.log(':::: Acknowledgement sent to vendor ::::');
     } catch (e) {
       console.error(e);
     }
